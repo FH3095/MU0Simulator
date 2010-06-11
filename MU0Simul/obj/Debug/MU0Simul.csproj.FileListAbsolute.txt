@@ -1,0 +1,12 @@
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\ResolveAssemblyReference.cache
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\Window1.baml
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\Window1.g.cs
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\App.g.cs
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul_MarkupCompile.cache
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul.g.resources
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul.Properties.Resources.resources
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul.csproj.GenerateResource.Cache
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\bin\Debug\MU0Simul.exe
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\bin\Debug\MU0Simul.pdb
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul.exe
+Z:\Desktop-Win\C Sharp\MU0\MU0Simul\MU0Simul\obj\Debug\MU0Simul.pdb
