@@ -68,6 +68,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alu.cs" />
     <Compile Include="Bus.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="NonSavingElement.cs" />

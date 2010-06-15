@@ -7,7 +7,7 @@ namespace MU0Simul
 {
     abstract class NonSavingElement : Element
     {
-        public NonSavingElement(TimingControl tc, int id) : base(tc,id)
+        public NonSavingElement() : base()
         {
         }
         override public void DoWriteToOther()

@@ -7,8 +7,8 @@ namespace MU0Simul
 {
     abstract class SavingElement : Element
     {
-        public SavingElement(TimingControl tc, int id)
-            : base(tc, id)
+        public SavingElement()
+            : base()
         {
         }
         override public void DoOperateToOther()

@@ -7,7 +7,6 @@ namespace MU0Simul
 {
     abstract class Element
     {
-        protected TimingControl tc;
         protected TimingControl.STATE curState;
         public TimingControl.STATE CurState
         {
@@ -20,6 +19,7 @@ namespace MU0Simul
                 curState = value;
             }
         }
+
         protected bool changed;
         public bool Changed
         {
@@ -28,7 +28,9 @@ namespace MU0Simul
                 return changed;
             }
         }
+
         protected LinkedList<Element> outputTargets;
+
         protected int data;
         public int Data
         {
@@ -37,8 +39,17 @@ namespace MU0Simul
                 return data;
             }
         }
-        abstract public void SetData(Element by, int data);
-        protected int id;
+        public void SetData(int data)
+        {
+            SetData(data,null);
+        }
+        public void SetData(int data,Element by)
+        {
+            this.data = data;
+            changed = true;
+        }
+
+        readonly protected int id;
         public int Id
         {
             get
@@ -46,30 +57,60 @@ namespace MU0Simul
                 return id;
             }
         }
-        protected int numInputs;
-        public int NumInputs
+
+        protected int numControlInputs;
+        public int NumControlInputs
         {
             get
             {
-                return numInputs;
+                return numControlInputs;
             }
         }
 
-        public Element(TimingControl tc,int id)
+        public Element()
         {
-            this.id = id;
+            this.id = TimingControl.Inst.createNextId();
             outputTargets = new LinkedList<Element>();
-            numInputs = 0;
-            this.tc = tc;
+            numControlInputs = 0;
         }
 
         public void AddOutputTarget(Element e)
         {
             outputTargets.AddLast(e);
         }
+        public bool RemoveOutputTarget(Element e)
+        {
+            return outputTargets.Remove(e);
+        }
 
         abstract public void DoWriteToOther();
         abstract public void DoOperateToOther();
         abstract public void DoReadFromOther();
+
+        protected void HandoverDoOperateToOther()
+        {
+            HandoverDoOperateToOther(outputTargets.GetEnumerator());
+        }
+        protected void HandoverDoOperateToOther(IEnumerator<Element> It)
+        {
+            It.Reset();
+            while (It.MoveNext())
+            {
+                It.Current.DoOperateToOther();
+            }
+        }
+
+        protected void HandoverData()
+        {
+            HandoverData(outputTargets.GetEnumerator());
+        }
+        protected void HandoverData(IEnumerator<Element> It)
+        {
+            It.Reset();
+            while (It.MoveNext())
+            {
+                It.Current.SetData(this.data, this);
+            }
+        }
     }
 }

@@ -7,12 +7,13 @@ namespace MU0Simul
 {
     class Bus : NonSavingElement
     {
-        Bus(TimingControl tc, int id)
-            : base(tc, id)
+        Bus()
+            : base()
         {
         }
         public override void DoOperateToOther()
         {
+
         }
     }
 }
