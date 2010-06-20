@@ -25,33 +25,38 @@ namespace MU0Simul
             DEC_B,
             RSB,
         };
-        protected class AluInput : NonSavingElement
+
+        protected NonSavingElement inA;
+        protected NonSavingElement inB;
+
+        public NonSavingElement InA
         {
-            public AluInput() : base()
+            get
             {
-            }
-            public override void DoOperateToOther()
-            {
-                HandoverDoOperateToOther();
+                return inA;
             }
         }
-        protected AluInput InA;
-        protected AluInput InB;
 
-        public Alu() : base()
+        public NonSavingElement InB
         {
-            this.numControlInputs = 1;
-            InA = new AluInput();
-            InA.AddOutputTarget(this);
-            InB = new AluInput();
-            InB.AddOutputTarget(this);
-            TimingControl.Inst.RegisterElement(this);
+            get
+            {
+                return inB;
+            }
+        }
+
+        public Alu() : base(1)
+        {
+            inA = new NonSavingElement();
+            inA.AddOutputTarget(this);
+            inB = new NonSavingElement();
+            inB.AddOutputTarget(this);
+            TimingControl.Inst.RegisterElement(Id,NumControlInputs);
         }
 
         protected void DoCalc()
         {
-            // TODO Vom TC die Operation holen
-            int inOp=0;
+            int inOp = TimingControl.Inst.GetControlInputs(this.Id)[0];
             OPERATION Op;
             if (Enum.IsDefined(typeof(OPERATION), inOp))
             {
@@ -64,40 +69,40 @@ namespace MU0Simul
             switch (Op)
             {
                 case OPERATION.A:
-                    data = InA.Data;
+                    data = inA.Data;
                     break;
                 case OPERATION.ADD:
-                    data = InA.Data + InB.Data;
+                    data = inA.Data + inB.Data;
                     break;
                 case OPERATION.B:
-                    data = InB.Data;
+                    data = inB.Data;
                     break;
                 case OPERATION.DEC_A:
-                    data = InA.Data - STEP_VALUE;
+                    data = inA.Data - STEP_VALUE;
                     break;
                 case OPERATION.DEC_B:
-                    data = InB.Data - STEP_VALUE;
+                    data = inB.Data - STEP_VALUE;
                     break;
                 case OPERATION.DIV:
-                    data = InA.Data / InB.Data;
+                    data = inA.Data / inB.Data;
                     break;
                 case OPERATION.INC_A:
-                    data = InA.Data + STEP_VALUE;
+                    data = inA.Data + STEP_VALUE;
                     break;
                 case OPERATION.INC_B:
-                    data = InB.Data + STEP_VALUE;
+                    data = inB.Data + STEP_VALUE;
                     break;
                 case OPERATION.MOD:
-                    data = InA.Data % InB.Data;
+                    data = inA.Data % inB.Data;
                     break;
                 case OPERATION.MUL:
-                    data = InA.Data * InB.Data;
+                    data = inA.Data * inB.Data;
                     break;
                 case OPERATION.SUB:
-                    data = InA.Data - InB.Data;
+                    data = inA.Data - inB.Data;
                     break;
                 case OPERATION.RSB:
-                    data = InB.Data - InA.Data;
+                    data = inB.Data - inA.Data;
                     break;
             }
         }

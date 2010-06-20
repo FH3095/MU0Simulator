@@ -5,16 +5,27 @@ using System.Text;
 
 namespace MU0Simul
 {
-    abstract class NonSavingElement : Element
+    class NonSavingElement : Element
     {
         public NonSavingElement() : base()
         {
         }
+
+        public NonSavingElement(int NumControlInputs)
+            : base(NumControlInputs)
+        {
+        }
+
         override public void DoWriteToOther()
         {
         }
         override public void DoReadFromOther()
         {
+        }
+        public override void DoOperateToOther()
+        {
+            HandoverData();
+            HandoverDoOperateToOther();
         }
     }
 }

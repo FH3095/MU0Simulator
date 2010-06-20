@@ -72,6 +72,14 @@ namespace MU0Simul
             this.id = TimingControl.Inst.createNextId();
             outputTargets = new LinkedList<Element>();
             numControlInputs = 0;
+            TimingControl.Inst.RegisterElement(Id,NumControlInputs);
+        }
+
+        public Element(int NumControlInputs)
+        {
+            this.id = TimingControl.Inst.createNextId();
+            outputTargets = new LinkedList<Element>();
+            numControlInputs = NumControlInputs;
         }
 
         public void AddOutputTarget(Element e)
