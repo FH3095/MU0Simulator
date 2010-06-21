@@ -111,5 +111,15 @@ namespace MU0Simul
             }
             return controls[Id];
         }
+
+        public Dictionary<int, Element>.Enumerator GetAllElements()
+        {
+            return controls.GetEnumerator();
+        }
+
+        public Dictionary<int, int[]>.Enumerator GetAllInputs()
+        {
+            return controlVars.GetEnumerator();
+        }
     }
 }

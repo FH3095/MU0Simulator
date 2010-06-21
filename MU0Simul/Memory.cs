@@ -74,8 +74,22 @@ namespace MU0Simul
             }
         }
 
+        protected bool IsMemRq()
+        {
+            return TimingControl.Inst.GetControlInputs(Id)[(int)CONTROL_VARS.MEM_RQ] != 0;
+        }
+
+        protected bool IsRead()
+        {
+            return TimingControl.Inst.GetControlInputs(Id)[(int)CONTROL_VARS.R_NW] != 0;
+        }
+
         public override void DoReadFromOther()
         {
+            if (!IsMemRq() || IsRead())
+            {
+                return;
+            }
             if (addressIn.Data >= memData.Length)
             {
                 throw new ArgumentOutOfRangeException();
@@ -87,6 +101,10 @@ namespace MU0Simul
 
         public override void DoOperateToOther()
         {
+            if (!IsMemRq() || !IsRead())
+            {
+                return;
+            }
             if (addressIn.Data >= memData.Length)
             {
                 throw new ArgumentOutOfRangeException();
