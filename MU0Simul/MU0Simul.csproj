@@ -92,6 +92,7 @@
     <Compile Include="Accumulator.cs" />
     <Compile Include="Alu.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="Memory.cs" />
     <Compile Include="Multiplexer.cs" />
     <Compile Include="NonSavingElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
