@@ -51,7 +51,7 @@ namespace MU0Simul
             inA.AddOutputTarget(this);
             inB = new NonSavingElement();
             inB.AddOutputTarget(this);
-            TimingControl.Inst.RegisterElement(Id,NumControlInputs);
+            TimingControl.Inst.RegisterElement(this);
         }
 
         protected void DoCalc()

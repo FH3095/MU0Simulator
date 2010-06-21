@@ -12,6 +12,8 @@ namespace MU0Simul
             OUTPUT=0,
             OPERATE,
             INPUT,
+
+            MAX
         };
 
         public enum STATIC_CONTROL_VARS
@@ -28,6 +30,7 @@ namespace MU0Simul
         public const int STATIC_CONTROL_VARS_ID = 0;
 
         protected Dictionary<int, int[]> controlVars;
+        protected Dictionary<int, Element> controls;
         private static readonly TimingControl instance = new TimingControl();
         public static TimingControl Inst
         {
@@ -58,30 +61,36 @@ namespace MU0Simul
             return Id;
         }
 
-        public void RegisterElement(int Id,int NumControlInputs)
+        public void RegisterElement(Element e)
         {
-            if (controlVars.ContainsKey(Id))
+            if (controlVars.ContainsKey(e.Id))
             {
-                throw new Exception("Element already registred.");
+                throw new ArgumentException("Element already registred.");
+            }
+            if (e.Id <= STATIC_CONTROL_VARS_ID)
+            {
+                throw new ArgumentException("Element id lower than " + STATIC_CONTROL_VARS_ID);
             }
 
-            if (NumControlInputs != 0)
+            controls.Add(e.Id, e);
+            if (e.NumControlInputs != 0)
             {
-                int[] Array = new int[NumControlInputs];
+                int[] Array = new int[e.NumControlInputs];
                 for (int i = 0; i < Array.Length; ++i)
                 {
                     Array[i] = 0;
                 }
-                controlVars.Add(Id, Array);
+                controlVars.Add(e.Id, Array);
             }
             else
             {
-                controlVars.Add(Id, null);
+                controlVars.Add(e.Id, null);
             }
         }
 
         public bool UnregisterElement(int Id)
         {
+            controls.Remove(Id);
             return controlVars.Remove(Id);
         }
 
@@ -89,9 +98,18 @@ namespace MU0Simul
         {
             if (!controlVars.ContainsKey(Id))
             {
-                throw new ArgumentOutOfRangeException("int id("+Id+")", "No such element-id.");
+                return null;
             }
             return controlVars[Id];
+        }
+
+        public Element GetElementById(int Id)
+        {
+            if (!controls.ContainsKey(Id))
+            {
+                return null;
+            }
+            return controls[Id];
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MU0Simul
             in0.AddOutputTarget(this);
             in1 = new NonSavingElement();
             in1.AddOutputTarget(this);
-            TimingControl.Inst.RegisterElement(Id,NumControlInputs);
+            TimingControl.Inst.RegisterElement(this);
         }
 
         protected NonSavingElement in0;

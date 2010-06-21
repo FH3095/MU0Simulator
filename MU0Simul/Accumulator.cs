@@ -18,7 +18,7 @@ namespace MU0Simul
         public Accumulator()
             : base((int)CONTROL_VARS.MAX)
         {
-            TimingControl.Inst.RegisterElement(Id, NumControlInputs);
+            TimingControl.Inst.RegisterElement(this);
         }
 
         public override void DoWriteToOther()
